@@ -315,7 +315,7 @@ export class CompareResultsNode extends ViewNode<SearchAndCompareView> {
 		} else if (this._ref.ref === '') {
 			comparison = this._compareWith.ref;
 		} else {
-			comparison = `${this._compareWith.ref}..${this._ref.ref}`;
+			comparison = `${this._compareWith.ref}...${this._ref.ref}`;
 		}
 
 		const files = await Container.git.getDiffStatus(this.uri.repoPath!, comparison);

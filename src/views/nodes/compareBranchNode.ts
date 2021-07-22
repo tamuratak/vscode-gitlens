@@ -318,7 +318,7 @@ export class CompareBranchNode extends ViewNode<BranchesView | CommitsView | Rep
 		} else if (this.compareWithWorkingTree) {
 			comparison = this._compareWith!.ref;
 		} else {
-			comparison = `${this._compareWith!.ref}..${this.branch.ref}`;
+			comparison = `${this._compareWith!.ref}...${this.branch.ref}`;
 		}
 
 		const files = await Container.git.getDiffStatus(this.uri.repoPath!, comparison);
