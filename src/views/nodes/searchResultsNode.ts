@@ -238,16 +238,12 @@ export class SearchResultsNode extends ViewNode<SearchAndCompareView> implements
 	): string {
 		if (typeof label === 'string') return label;
 
-		const count = log?.count ?? 0;
+//		const count = log?.count ?? 0;
 
-		const resultsType =
-			label.resultsType === undefined ? { singular: 'result', plural: 'results' } : label.resultsType;
+//		const resultsType =
+//			label.resultsType === undefined ? { singular: 'result', plural: 'results' } : label.resultsType;
 
-		return `${Strings.pluralize(resultsType.singular, count, {
-			number: log?.hasMore ?? false ? `${count}+` : undefined,
-			plural: resultsType.plural,
-			zero: 'No',
-		})} ${label.label}`;
+		return `${label.label}`;
 	}
 
 	private getSearchQuery(

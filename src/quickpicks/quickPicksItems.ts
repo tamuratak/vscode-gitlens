@@ -233,7 +233,7 @@ export class SearchForCommitQuickPickItem extends CommandQuickPickItem {
 			},
 			{
 				label: {
-					label: `for ${GitReference.toString(this.reference, { icon: false })}`,
+					label: `${GitReference.toString(this.reference, { icon: false })}`,
 				},
 				reveal: {
 					select: true,
