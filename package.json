@@ -2,7 +2,7 @@
 	"name": "gitlens",
 	"displayName": "GitLens — Git supercharged",
 	"description": "Supercharge the Git capabilities built into Visual Studio Code — Visualize code authorship at a glance via Git blame annotations and code lens, seamlessly navigate and explore Git repositories, gain valuable insights via powerful comparison commands, and so much more",
-	"version": "11.6.1",
+	"version": "111.6.1",
 	"author": {
 		"name": "Eric Amodio",
 		"email": "eamodio@gmail.com"
@@ -9460,17 +9460,6 @@
 				"key": "ctrl+c",
 				"mac": "cmd+c",
 				"when": "gitlens:enabled && focusedView =~ /^gitlens\\.views\\.tags/"
-			}
-		],
-		"customEditors": [
-			{
-				"viewType": "gitlens.rebase",
-				"displayName": "GitLens Interactive Rebase Editor",
-				"selector": [
-					{
-						"filenamePattern": "git-rebase-todo"
-					}
-				]
 			}
 		],
 		"resourceLabelFormatters": [
