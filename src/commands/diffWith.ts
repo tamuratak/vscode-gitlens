@@ -90,8 +90,8 @@ export class DiffWithCommand extends Command {
 		if (args.repoPath == null) return;
 
 		try {
-			let lhsSha = args.lhs.sha;
-			let rhsSha = args.rhs.sha;
+			const lhsRef = args.lhs.sha;
+			const rhsRef = args.rhs.sha;
 
 			[args.lhs.sha, args.rhs.sha] = await Promise.all([
 				await this.container.git.resolveReference(args.repoPath, args.lhs.sha, args.lhs.uri, {
@@ -104,10 +104,6 @@ export class DiffWithCommand extends Command {
 				}),
 			]);
 
-			if (args.lhs.sha !== GitRevision.deletedOrMissing) {
-				lhsSha = args.lhs.sha;
-			}
-
 			if (args.rhs.sha && args.rhs.sha !== GitRevision.deletedOrMissing) {
 				// Ensure that the file still exists in this commit
 				const status = await this.container.git.getFileStatusForCommit(
@@ -117,8 +113,6 @@ export class DiffWithCommand extends Command {
 				);
 				if (status?.status === 'D') {
 					args.rhs.sha = GitRevision.deletedOrMissing;
-				} else {
-					rhsSha = args.rhs.sha;
 				}
 
 				if (status?.status === 'A' && args.lhs.sha.endsWith('^')) {
@@ -131,7 +125,7 @@ export class DiffWithCommand extends Command {
 				this.container.git.getBestRevisionUri(args.repoPath, args.rhs.uri.fsPath, args.rhs.sha),
 			]);
 
-			let rhsSuffix = GitRevision.shorten(rhsSha, { strings: { uncommitted: 'Working Tree' } });
+			let rhsSuffix = GitRevision.shorten(rhsRef, { strings: { uncommitted: 'Working Tree' } });
 			if (rhs == null) {
 				if (GitRevision.isUncommitted(args.rhs.sha)) {
 					rhsSuffix = 'deleted';
@@ -144,7 +138,7 @@ export class DiffWithCommand extends Command {
 				rhsSuffix = `added${rhsSuffix.length === 0 ? '' : ` in ${rhsSuffix}`}`;
 			}
 
-			let lhsSuffix = args.lhs.sha !== GitRevision.deletedOrMissing ? GitRevision.shorten(lhsSha) : '';
+			let lhsSuffix = args.lhs.sha !== GitRevision.deletedOrMissing ? GitRevision.shorten(lhsRef) : '';
 			if (lhs == null && args.rhs.sha.length === 0) {
 				if (rhs != null) {
 					lhsSuffix = lhsSuffix.length === 0 ? '' : `not in ${lhsSuffix}`;
