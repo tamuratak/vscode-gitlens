@@ -830,7 +830,7 @@ export class ViewCommands {
 	private compareHeadWith(node: ViewRefNode) {
 		if (!(node instanceof ViewRefNode)) return Promise.resolve();
 
-		return this.container.searchAndCompareView.compare(node.repoPath, 'HEAD', node.ref);
+		return this.container.searchAndCompareView.compare(node.repoPath, node.ref, 'HEAD');
 	}
 
 	@debug()
@@ -845,7 +845,7 @@ export class ViewCommands {
 	private compareWorkingWith(node: ViewRefNode) {
 		if (!(node instanceof ViewRefNode)) return Promise.resolve();
 
-		return this.container.searchAndCompareView.compare(node.repoPath, '', node.ref);
+		return this.container.searchAndCompareView.compare(node.repoPath, node.ref, '');
 	}
 
 	@debug()
